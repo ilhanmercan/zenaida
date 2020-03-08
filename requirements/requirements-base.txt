@@ -13,5 +13,6 @@ django-bootstrap4
 django-nested-admin
 django-grappelli
 django-extensions
+django-two-factor-auth
 pdfkit
 btcpay-python

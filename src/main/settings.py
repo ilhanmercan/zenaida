@@ -223,11 +223,16 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # improved amdin: https://django-nested-admin.readthedocs.io/en/latest/quickstart.html
+    # 2FA
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
+    # improved admin: https://django-nested-admin.readthedocs.io/en/latest/quickstart.html
     'nested_admin',
     # html templates: https://django-bootstrap4.readthedocs.io/en/stable/quickstart.html
     'bootstrap4',
-    # usefull things: https://django-extensions.readthedocs.io/en/latest/command_extensions.html
+    # useful things: https://django-extensions.readthedocs.io/en/latest/command_extensions.html
     'django_extensions',
     'billing',
     'accounts',
@@ -243,6 +248,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'raven.contrib.django.middleware.SentryLogMiddleware',
@@ -410,7 +416,8 @@ ALERT_EMAIL_RECIPIENTS = getattr(params, 'ALERT_EMAIL_RECIPIENTS', [])
 LOADED_OK = 'OK'
 
 # DJANGO SETTINGS
-LOGIN_URL = '/accounts/login/'
+# LOGIN_URL = '/accounts/login/'
+LOGIN_URL = 'two_factor:login'
 
 #------------------------------------------------------------------------------
 #--- ZENAIDA RELATED CONFIGS

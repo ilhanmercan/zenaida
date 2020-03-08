@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
 from django.urls import path
-from django.conf.urls import include
+from django.conf.urls import include, url
 from django.views.generic import TemplateView
 
 from front import views as front_views
@@ -13,7 +13,7 @@ from billing.pay_4csonline import views as pay_4csonline_views
 from billing.pay_btcpay import views as pay_btcpay_views
 from board import views as board_views
 from accounts import views as accounts_views
-
+from two_factor.urls import urlpatterns as tf_urls
 
 admin_patterns = [
     path('grappelli/', include('grappelli.urls')),
@@ -23,6 +23,7 @@ admin_patterns = [
 ]
 
 auth_patterns = [
+    url(r'', include(tf_urls)),
     path('accounts/login/', accounts_views.SignInView.as_view(), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(
         template_name='accounts/logout.html'), name='logout'),
